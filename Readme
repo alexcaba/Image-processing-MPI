@@ -1,0 +1,20 @@
+Caba Alexandru 332CB  Tema 3 APD
+
+	In realizarea temei se observa 2 parti principale:
+
+-prima partea cea de aflare a topologiei, realizata cu ajutorul exercitiilor facute la laborator
+
+-a doua parte cea de prelucrare a imaginilor care consta in: impartirea liniilor de catre radacina si nodurile intermediare si transmiterea acestora vecinilor, aplicarea filtrelor la nivelul frunzelor pe blocurile primite, primirea raspunsului de catre nodurile intermediare si asamblarea rezultatelor si crearea statisticilor 
+
+In prima parte fiecare nod isi citeste linia corespunzatoare din fisier pentru aflarea vecinilor, dupa care se trece la aflarea topologiei. Radacina(rank=0) trimite un mesaj tuturor vecinilor dupa care asteapta un raspuns. Restul nodurilor asteapta un mesaj de la parinte pe care il marcheaza si trimit mai departe nodurilor ramase in vectorul vecini. Procesul se repeta pana se ajunge la frunze dupa care se incepe trimiterea raspunsurilor inapoi catre parinte. La final elimin parintele din vectorul vecini pentru usurinta. Astfel raman doar cu fii fiecarui nod.
+
+A doua parte consta in prelucrarea imaginilor. 
+Nodul radacina deschide imaginile si citeste pixelii din fisier, dupa care trece la impartirea blocului de prelucrat in parti egale pentru fiecare vecin si trimite liniile corespunzatoare fiecaruia.
+Inainte de trimiterea unui bloc de prelucrat, nodul curent trimite un mesaj de "instiintare" ce contine dimensiunile blocului, astfel vecinii pot aloca memorie si primi liniile de procesat corect.
+Dupa aceea se asteapta raspunsurile care sunt combinate in imaginea finala. S-a pastrat un vector(primaLinieVecin) pt a stii de la ce linie incepe fiecare fiu pentru a putea asambla corect rezultatul si a scrie imaginea.
+Dupa ce au fost trimise toate imaginile, se trimite tag-ul de final(5) si se asteapta statistica de la vecini pentru a fi scrisa in fisier.
+
+Nodurile intermediare asteapta mesajul de instiintare pentru a stii dimensiunea blocului de prelucrat ce urmeaza. Daca mesajul are tag final se construieste statistica ce reprezinta un vector de dimensiunea numarului de procese si se combina pe parcurs din vecin in vecin, iar programul se incheie.	In caz contrar, acesta verifica dimensiunea blocului, aloca spatiul necesar si primeste liniile de procesat. Daca nodul nu este frunza, acesta imparte la randul lui blocul la numarul de vecini si trimite fiecaruia liniile corespunzatoare, dupa care asteapta raspunsurile.
+Daca nodul este frunza acesta aplica filtrul asupra liniilor primite dupa care trimite raspuns inapoi parintelui liniile procesate.
+
+Dupa make build executabilul are numele filtru si poate fi rulat conform comenzii din enunt.
